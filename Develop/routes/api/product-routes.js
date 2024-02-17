@@ -3,16 +3,13 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 router.get('/', (req, res) => {
 });
-
 router.get('/:id', (req, res) => {
 });
 
 
 router.post('/', (req, res) => {
-
   Product.create(req.body)
     .then((product) => {
-      
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
@@ -22,7 +19,6 @@ router.post('/', (req, res) => {
         });
         return ProductTag.bulkCreate(productTagIdArr);
       }
-
       res.status(200).json(product);
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
@@ -33,7 +29,6 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-
   Product.update(req.body, {
     where: {
       id: req.params.id,
@@ -67,17 +62,14 @@ router.put('/:id', (req, res) => {
           ]);
         });
       }
-
       return res.json(product);
     })
     .catch((err) => {
-
       res.status(400).json(err);
     });
 });
 
 router.delete('/:id', (req, res) => {
-
 });
 
 module.exports = router;
